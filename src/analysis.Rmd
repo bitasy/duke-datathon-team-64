@@ -1,0 +1,44 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+df_profiles <- read.csv('user_profile.csv')
+summary(df_profiles)
+```
+
+Clean up age and credit score
+```{r}
+df_profiles$credit_score_recoded <- as.numeric(df_profiles$credit_score_bucket)
+df_profiles$credit_score_recoded <- (df_profiles$credit_score_recoded-1)*5+497.5
+df_agefiltered <- df_profiles %>% filter(age_bucket!="")
+df_agefiltered$age_recoded <- as.numeric(df_agefiltered$age_bucket)
+df_agefiltered$age_recoded <- (df_agefiltered$age_recoded-2)*5+17.5
+df_just_age_credi
+```
+
+
+```{r}
+ggplot(data = df_agefiltered) +
+  geom_bar(aes(x=age_recoded))
+```
+```{r}
+ggplot(data = df_agefiltered) +
+  geom_bar(aes(x=credit_score_recoded),stat = "count")
+```
+
+```{r}
+summary(df_agefiltered$count_bankruptcy)
+ggplot(data = df_agefiltered) +
+  geom_bar(aes(x=count_bankruptcy))
+```
+
